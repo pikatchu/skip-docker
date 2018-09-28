@@ -1,0 +1,12 @@
+#!/bin/bash
+set -ex
+
+IMAGE=$1/skip
+TAG=dev
+
+docker pull ubuntu:18.04
+
+docker rmi ${IMAGE}:${TAG} || true
+
+docker build -t ${IMAGE}:${TAG} $(dirname "$0")/skip
+docker push ${IMAGE}:${TAG}
